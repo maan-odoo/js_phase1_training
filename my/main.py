@@ -58,27 +58,6 @@ class MainClass(object):
                 return redirect('/%s+' % short_id)
         return self.render_template('index.html', error=error, url=url)
 
-#     def insert_url(self, url):
-#         short_id = self.redis.get('reverse-url:' + url)
-#         if short_id is not None:
-#             return short_id
-#         url_num = self.redis.incr('last-url-id')
-#         short_id = base36_encode(url_num)
-#         self.redis.set('url-target:' + short_id, url)
-#         self.redis.set('reverse-url:' + url, short_id)
-#         return short_id
-
-# def base36_encode(number):
-#     assert number >= 0, 'positive integer required'
-#     if number == 0:
-#         return '0'
-#     base36 = []
-#     while number != 0:
-#         number, i = divmod(number, 36)
-#         base36.append('0123456789abcdefghijklmnopqrstuvwxyz'[i])
-#     return ''.join(reversed(base36))
-
-
 def create_app(redis_host='localhost', redis_port=6379, with_static=True):
     app = MainClass({
         'redis_host':       redis_host,
@@ -94,5 +73,3 @@ if __name__ == '__main__':
     from werkzeug.serving import run_simple
     app = create_app()
     run_simple('127.0.0.1', 5000, app, use_debugger=True, use_reloader=True)
-
-
