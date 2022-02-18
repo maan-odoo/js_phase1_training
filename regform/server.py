@@ -35,7 +35,9 @@ class Application:
             [
                 Rule("/", endpoint="index"),
                 Rule("/register", endpoint="register"),
+                Rule("/reguserjs", endpoint="regUser"),
                 Rule("/getuser", endpoint="getuser"),
+                
             ]
         )
 
@@ -56,8 +58,14 @@ class Application:
         html = open("templates/%s"%(file_name), 'r').read()
         return Response(html, mimetype='text/html')
 
+    def regUser(self,request):
+        print("this side")
+        print(request.form['username'])
+        return self.server_html_file('index.html')
+
     def index(self, request):
         return self.server_html_file('index.html')
+
     def register(self, request):
         if request.method == "POST":
             username = request.form['username']
@@ -65,7 +73,7 @@ class Application:
             password = request.form['password']
         conn = psycopg2.connect(database='new', user='postgres', password='postgres', host='localhost', port='5432')
         cur = conn.cursor()
-        
+
         cur.execute("INSERT INTO users (name,email,password) VALUES (%s,%s,%s)",(username,email,password))
         conn.commit()
         return self.server_html_file('index.html')
@@ -73,13 +81,11 @@ class Application:
     def getuser(self,request):
         conn = psycopg2.connect(database='new', user='postgres', password='postgres', host='localhost', port='5432')
         cur = conn.cursor()
-        cur.execute("SELECT * FROM users")
+        cur.execute("SELECT * FROM users ORDER BY id ASC")
         result = cur.fetchall()
-        print(result)
+        # print(result)
         conn.commit()
         print(result)
-        
-        # return self.server_html_file('index.html')
         return Response(json.dumps(result))
   
 
