@@ -59,16 +59,16 @@ class Application:
 
     def regUser(self,request):
         if request.method == "POST":
-            print("inside post", request.form)
             username = request.form['username']
             email = request.form['email']
             password = request.form['password']
-        conn = psycopg2.connect(database='new', user='postgres', password='postgres', host='localhost', port='5432')
-        cur = conn.cursor()
+        if(len(username)>1):
+            conn = psycopg2.connect(database='new', user='postgres', password='postgres', host='localhost', port='5432')
+            cur = conn.cursor()
 
-        cur.execute("INSERT INTO users (name,email,password) VALUES (%s,%s,%s)",(username,email,password))
-        conn.commit()
-        print("Execute")
+            cur.execute("INSERT INTO users (name,email,password) VALUES (%s,%s,%s)",(username,email,password))
+            conn.commit()
+            print("Execute")
         return Response("Success......")
 
     def index(self, request):

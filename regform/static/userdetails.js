@@ -11,6 +11,7 @@ export class UserDetail{
 
             let htmldtata = document.querySelector("#dynamic");
             var table = document.createElement('table');
+            table.setAttribute("id","users-table");
             let thead = document.createElement('thead')
             let trh = document.createElement("tr");
 
