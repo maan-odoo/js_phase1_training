@@ -37,7 +37,6 @@ class Application:
                 Rule("/register", endpoint="register"),
                 Rule("/reguserjs", endpoint="regUser"),
                 Rule("/getuser", endpoint="getuser"),
-                
             ]
         )
 
@@ -59,9 +58,18 @@ class Application:
         return Response(html, mimetype='text/html')
 
     def regUser(self,request):
-        print("this side")
-        print(request.form['username'])
-        return self.server_html_file('index.html')
+        if request.method == "POST":
+            print("inside post", request.form)
+            username = request.form['username']
+            email = request.form['email']
+            password = request.form['password']
+        conn = psycopg2.connect(database='new', user='postgres', password='postgres', host='localhost', port='5432')
+        cur = conn.cursor()
+
+        cur.execute("INSERT INTO users (name,email,password) VALUES (%s,%s,%s)",(username,email,password))
+        conn.commit()
+        print("Execute")
+        return Response("Success......")
 
     def index(self, request):
         return self.server_html_file('index.html')
@@ -83,9 +91,7 @@ class Application:
         cur = conn.cursor()
         cur.execute("SELECT * FROM users ORDER BY id ASC")
         result = cur.fetchall()
-        # print(result)
         conn.commit()
-        print(result)
         return Response(json.dumps(result))
   
 

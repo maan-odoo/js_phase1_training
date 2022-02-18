@@ -43,4 +43,21 @@ export class UserDetail{
     
         request.send();
     }
+    getUserdetails(){
+        console.log("click s1 button")
+        let name = document.querySelector("#username").value;
+        let email = document.querySelector("#useremail").value;
+        let password = document.querySelector("#userpassword").value;
+        let url = 'http://127.0.0.1:8000/reguserjs';
+        let request = new XMLHttpRequest();
+        request.open('POST', url, true);
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+       
+        console.log(name)
+        console.log(email)
+        console.log(password)
+        let param = 'username='+name+'&email='+email+'&password='+password;
+        console.log(param)
+        request.send(param)
+    }
 }

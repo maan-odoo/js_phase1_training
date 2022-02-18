@@ -7,8 +7,6 @@ const userres = document.querySelector("#get_users")
 userres.addEventListener("click",()=>{
     const u = new UserDetail();
     u.generateUserDetails();
-
-    
 });
 
 btn.addEventListener("click",()=>{

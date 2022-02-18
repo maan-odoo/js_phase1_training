@@ -1,3 +1,4 @@
+import {UserDetail} from "./userdetails.js";
 export class UserForm {
     generateForm(){
          // Create a form dynamically
@@ -10,6 +11,7 @@ export class UserForm {
         name.setAttribute("type", "text");
         name.setAttribute("name", "username");
         name.setAttribute("placeholder", "Enter User name");
+        name.setAttribute("id", "username");
         
 
          // Create an input element for emailmail
@@ -17,12 +19,14 @@ export class UserForm {
          mail.setAttribute("type", "text");
          mail.setAttribute("name", "email");
          mail.setAttribute("placeholder", "Enter name");
+         mail.setAttribute("id", "useremail");
 
          // Create an input element for password
          let ps = document.createElement("input");
          ps.setAttribute("type", "password");
          ps.setAttribute("name", "password");
          ps.setAttribute("placeholder", "Password");
+         ps.setAttribute("id", "userpassword");
 
          // Create a submit button
          let s = document.createElement("input");
@@ -63,7 +67,9 @@ export class UserForm {
         s1.setAttribute("type", "button");
         s1.setAttribute("value", "Without Reload");
         s1.addEventListener("click",()=>{
-            console.log("click s1 button")
+            let userDetail = new UserDetail();
+            userDetail.getUserdetails();
+
         });
         
         form.append(name)
