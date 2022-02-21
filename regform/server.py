@@ -37,6 +37,7 @@ class Application:
                 Rule("/register", endpoint="register"),
                 Rule("/reguserjs", endpoint="regUser"),
                 Rule("/getuser", endpoint="getuser"),
+                Rule("/deluser", endpoint="deleteUser"),
             ]
         )
 
@@ -93,6 +94,19 @@ class Application:
         result = cur.fetchall()
         conn.commit()
         return Response(json.dumps(result))
+
+    def deleteUser(self,request):
+        if request.method == "POST":
+            id = str(request.form['id'])
+            
+        conn = psycopg2.connect(database='new', user='postgres', password='postgres', host='localhost', port='5432')
+        cur = conn.cursor()
+        query  = "DELETE FROM users WHERE id ="+id
+        print(query)
+        cur.execute(query)
+        conn.commit()
+        print("Execute")
+        return Response("Success......")
   
 
 

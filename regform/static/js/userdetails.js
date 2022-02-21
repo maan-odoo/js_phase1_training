@@ -24,16 +24,45 @@ export class UserDetail{
             let tdh3 = document.createElement("th")
             tdh3.innerHTML = "PASSWORD";
 
+            let tdh4 = document.createElement("th")
+            tdh4.innerHTML = "DELETE";
+
             trh.appendChild(tdh1);
             trh.appendChild(tdh2);
             trh.appendChild(tdh3);
+            trh.appendChild(tdh4);
             thead.appendChild(trh)
             table.appendChild(thead);
             for (let i = 0; i < data.length; i++) {
                 let tr = document.createElement('tr'); 
-                for (var j = 1; j<4; j++) {
+                for (var j = 0; j<4; j++) {
+                            if(j==3){
+                                let tdElement = document.createElement('td');
+                                let btnDel = document.createElement("button");
+                                btnDel.setAttribute("value",data[i][0]);
+                                btnDel.setAttribute("type","button");
+                                btnDel.setAttribute("class", "btn btn-del btn-reg");
+                                btnDel.innerHTML = "DELETED";
+                                btnDel.addEventListener("click",()=>{
+                                    // debugger;
+                                    let delid = btnDel.value;
+                                    let url = 'deluser';
+                                    let request = new XMLHttpRequest();
+                                    request.open('POST', url, true);
+                                    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                                    let param = 'id='+delid;
+                                    console.log(param)
+                                    request.send(param)
+                                    generateUserDetails();
+                                });
+
+                                tdElement.appendChild(btnDel);
+                                // tdElement.innerHTML = "delete"+data[i][0];
+                                tr.appendChild(tdElement);
+                                break;
+                            }
                             let tdElement = document.createElement('td');
-                            tdElement.innerHTML = data[i][j];
+                            tdElement.innerHTML = data[i][j+1];
                             tr.appendChild(tdElement);
                 }
                 table.appendChild(tr); 
