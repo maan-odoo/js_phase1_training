@@ -38,18 +38,18 @@ export class UserForm {
         s1.setAttribute("class", "btn btn-reg");
         s1.addEventListener("click",()=>{
             let userDetail = new UserDetail();
-            userDetail.getUserdetails();
-
+            userDetail.registerUserdetails();
+            
+            document.querySelector("#dynamic").innerHTML="<h2>Your Data is successfully stored<br>Thank You For Registeration.</h2>";
+            document.querySelector("#dynamic").setAttribute("class","msg");
         });
-        
         form.append(name)
         form.append(mail);
         form.append(ps);
         // form.append(s);
         form.append(s1);
-
-         document.querySelector("#dynamic")
-        .appendChild(form);
+        document.querySelector("#dynamic").innerHTML="";
+        document.querySelector("#dynamic").appendChild(form);
 
     }
 }

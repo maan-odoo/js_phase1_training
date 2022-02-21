@@ -84,3 +84,9 @@
     background-color: #04AA6D;
     color: white;
   }
+.msg{
+  margin-top: 50px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #4CAF50;
+}
