@@ -39,9 +39,6 @@ export class UserForm {
         s1.addEventListener("click",()=>{
             let userDetail = new UserDetail();
             userDetail.registerUserdetails();
-            
-            document.querySelector("#dynamic").innerHTML="<h2>Your Data is successfully stored<br>Thank You For Registeration.</h2>";
-            document.querySelector("#dynamic").setAttribute("class","msg");
         });
         form.append(name)
         form.append(mail);

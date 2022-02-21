@@ -44,7 +44,6 @@ export class UserDetail{
                                 btnDel.setAttribute("class", "btn btn-del btn-reg");
                                 btnDel.innerHTML = "DELETED";
                                 btnDel.addEventListener("click",()=>{
-                                    // debugger;
                                     let delid = btnDel.value;
                                     let url = 'deluser';
                                     let request = new XMLHttpRequest();
@@ -55,9 +54,7 @@ export class UserDetail{
                                     request.send(param)
                                     generateUserDetails();
                                 });
-
                                 tdElement.appendChild(btnDel);
-                                // tdElement.innerHTML = "delete"+data[i][0];
                                 tr.appendChild(tdElement);
                                 break;
                             }
@@ -86,7 +83,8 @@ export class UserDetail{
         console.log(email)
         console.log(password)
         let param = 'username='+name+'&email='+email+'&password='+password;
-        console.log(param)
         request.send(param)
+        document.querySelector("#dynamic").innerHTML="<h2>Your Data is successfully stored<br>Thank You For Registeration.</h2>";
+        document.querySelector("#dynamic").setAttribute("class","msg");
     }
 }
