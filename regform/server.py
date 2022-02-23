@@ -66,10 +66,8 @@ class Application:
         if(len(username)>1):
             conn = psycopg2.connect(database='new', user='postgres', password='postgres', host='localhost', port='5432')
             cur = conn.cursor()
-
             cur.execute("INSERT INTO users (name,email,password) VALUES (%s,%s,%s)",(username,email,password))
             conn.commit()
-            print("Execute")
         return Response("Success......")
 
     def index(self, request):
@@ -82,7 +80,6 @@ class Application:
             password = request.form['password']
         conn = psycopg2.connect(database='new', user='postgres', password='postgres', host='localhost', port='5432')
         cur = conn.cursor()
-
         cur.execute("INSERT INTO users (name,email,password) VALUES (%s,%s,%s)",(username,email,password))
         conn.commit()
         return self.server_html_file('index.html')
@@ -102,10 +99,8 @@ class Application:
         conn = psycopg2.connect(database='new', user='postgres', password='postgres', host='localhost', port='5432')
         cur = conn.cursor()
         query  = "DELETE FROM users WHERE id ="+id
-        print(query)
         cur.execute(query)
         conn.commit()
-        print("Execute")
         return Response("Success......")
   
 

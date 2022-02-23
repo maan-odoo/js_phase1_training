@@ -64,7 +64,6 @@ export class UserDetail{
                 }
                 table.appendChild(tr); 
             }
-            document.querySelector("#dynamic").innerHTML="";
             htmldtata.appendChild(table);
         };
     
