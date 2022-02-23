@@ -34,7 +34,6 @@ class Application:
         self.url_map = Map(
             [
                 Rule("/", endpoint="index"),
-                Rule("/register", endpoint="register"),
                 Rule("/reguserjs", endpoint="regUser"),
                 Rule("/getuser", endpoint="getuser"),
                 Rule("/deluser", endpoint="deleteUser"),
@@ -73,16 +72,6 @@ class Application:
     def index(self, request):
         return self.server_html_file('index.html')
 
-    def register(self, request):
-        if request.method == "POST":
-            username = request.form['username']
-            email = request.form['email']
-            password = request.form['password']
-        conn = psycopg2.connect(database='new', user='postgres', password='postgres', host='localhost', port='5432')
-        cur = conn.cursor()
-        cur.execute("INSERT INTO users (name,email,password) VALUES (%s,%s,%s)",(username,email,password))
-        conn.commit()
-        return self.server_html_file('index.html')
     
     def getuser(self,request):
         conn = psycopg2.connect(database='new', user='postgres', password='postgres', host='localhost', port='5432')
@@ -116,4 +105,4 @@ if __name__ == "__main__":
     from werkzeug.serving import run_simple
 
     application = create_app()
-    run_simple("127.0.0.1", 8000, application, use_debugger=True, use_reloader=True)
+    run_simple("127.0.0.1", 8002, application, use_debugger=True, use_reloader=True)

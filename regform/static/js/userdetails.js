@@ -6,6 +6,7 @@ export class UserDetail{
         request.responseType = 'text';
     
         request.onload = function() {
+            document.querySelector("#dynamic").innerHTML = ""
             document.querySelector("#dynamic").setAttribute("class","");
             let reqData = request.response;
             let data = JSON.parse(reqData);
